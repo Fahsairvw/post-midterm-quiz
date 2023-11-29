@@ -100,3 +100,30 @@ class Table:
     def __str__(self):
         return self.table_name + ':' + str(self.table)
 
+    def insert_row(self, dict):
+        list_movies = []
+        list_movies.append(dict)
+    def update_row(self, primary_attribute, primary_attribute_value, update_attribute, update_value):
+        '''
+        This method updates the current value of update_attribute to update_value'''
+        pass
+
+
+table1 = Table('movies', movies)
+table2 = Table('movies', movies)
+
+my_DB = DB()
+my_DB.insert(table1)
+my_DB.insert(table2)
+my_table1 = my_DB.search('movies')
+my_table2 = my_DB.search('movies')
+my_table1_filter = my_table1.filter(lambda x: x['Genre'] == 'Comedy')
+my_table2_filter= my_table2.filter(lambda x: x['Genre'] == 'Drama')
+_list = []
+for i in my_table1_filter:
+    _list.append(float(i['Worldwide Gross']))
+print(f'The average value of ‘Worldwide Gross’ for ‘Comedy’ movies is {sum(_list)/len(_list)}')
+print('Min', my_table2_filter.aggregate(lambda x: min(x), 'Audience score %'))
+
+
+
